@@ -64,15 +64,13 @@ You will need a decent computer and basic understanding of Python programming to
 ## Using the Command-line Tool
 
 ### 1. Getting filter options
-To view filter options in your commandline run:
+To view filter options in your command-line *(terminal/bash/shell)* run:
 
-`python
-python3 -c 'import report_retriever; print(report_retriever.get_filter_options())'`
+```bash
+python3 report_retriever.py -op
+```
 
-To save filter options as a ".json" file in run:
-
-`python
-python3 -c 'import report_retriever; report_retriever.save_filter_options()'`
+if no file named *WAHIS_filter_options.json"* is present it will create one with all possible filtering options in it.
 
 ### 2. Gathering reports
 Now that you've thought about the data that is of interest to you, you're going to need to make a list of all the reports that fit the criteria of your filter options.
