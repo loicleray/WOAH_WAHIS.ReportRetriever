@@ -1,9 +1,11 @@
 # OIE_WAHIS.ReportRetriever
 Automatically download publicly available animal disease reports from the World Organisation for Animal Health WAHIS database. Researchers can filter and download disease outbreak information to Excel Spreadsheets, without having to do it manually.
 
-**Made with ♥ by [Loic Leray](https://loicleray.com). I hope that these tools will help epidemiologists and researchers with their projects. If you use this tool I'd really appreciate if you showed me the projects you're working on.**
+---
+*Made with ♥ by [Loic Leray](https://loicleray.com). I hope that these tools will help epidemiologists and researchers with their projects. If you use this tool I'd really appreciate if you showed me the projects you're working on.*
+---
 
-## Intro
+## Introduction
 This document describes a new method for "web scraping" data from the World Organisation for Animal Health's (WOAH, previously OIE) World Animal Health Information System (WAHIS). It replaces [previous efforts to automate WAHIS data download](https://onlinelibrary.wiley.com/doi/abs/10.1111/tbed.14133?casa_token=V85WAk0RTFMAAAAA:lPcjIz-Os652-5RChFVqjZcWOhrb-8IdP6IKr5CsoS9NfCoP5CwVUiNPY78-GYhEO1cSM1m4CUeKvg).
 
 
@@ -21,64 +23,62 @@ By default this script creates an excel spreadsheet for each outbreak in the dis
 
 ![image](https://user-images.githubusercontent.com/47128655/190842786-afdd502e-628f-4d90-815e-63dd41ab26db.jpeg)
 
-### Filtering to the data I need?
+## How to use this tool?
+There are two ways you can interact with this tool. Either via the command-line interface (CLI) or in your own scripts. The CLI is the recommended (and most approachable way) for non-coders to get WAHIS report data.
 
-WAHIS has a lot of data. You're going to want to limit your search results to access only the data you need.
+ That said, there is fairly extensive documentation (*see DOCUMENTATION.md file*) for those wanting to build their own scripts. This requires will need a decent computer and basic understanding of Python programming language.
 
-This will reduce how long it takes for the program to run and also helps minimise the load on WAHIS servers. Reports should also be filtered by date range `start_date` and `end_date` in *YYYY-MM-DD* format. Reports can be filtered via 10 filters, including:
+# USAGE: ReportRetriever in the Command-line (RECOMMENDED)
+
+WAHIS has a lot of data. You're going to want to limit your search results to access only the data you need. This will reduce how long it takes for the program to run and also helps minimise the load on WAHIS servers. As you'll see below, reports must also be filtered by date range `start_date` and `end_date` in *YYYY-MM-DD* format. You can currently filter reports parameters listed below.
 
 1. **country**
     * **EG:** Afghanistan, Albania, Algeria, American Samoa, etc...
+    * flag: `-c` or `--country`
 2. **region**
     * **EG:** Africa, Americas, Asia, Europe, Middle East, ect...
-3. **epiEventId**
-    * **EG:** EBLV1, EBLV2, H1, H10, H10N1, H10N2, H10N33, ect...
+    * flag: `-r` or `--region`
 4. **diseases**
     * **EG:** African swine fever virus (Inf. with), Algal toxicosis (2008-), Anthrax, Toxoplasma gondii (Inf. with)(2008-), Toxoplasmosis, ect...
-5. **diseaseType**
-    * **EG:** EBLV1, EBLV2, H1, H10, H10N1, H10N2, H10N33, ect...
-6. **reason**
-    * **EG:** Emerging disease, First occurrence in a zone or a compartment, First occurrence in the country, New host, etc...
-7. **eventDate**
-    * Any date range that you input.
-8. **eventStatus**
-    * **EG:** On-going, Resolved, Stable
-9. **reportHistoryType**
-    * **EG:** Follow-up report, Immediate notification, etc...
-10. **reportDate**
-    * Any date range that you input.
+    * flag: `-d` or `--disease`
+4. **start_date**
+    * date in YYYY-MM-DD format
+    * **EG:** 2022-02-19
+    * flag: `-sd` or `--start_date`
+5. **end_date**
+    * date in YYYY-MM-DD format
+    * **EG:** 2022-02-19
+    * flag: `-ed` or `--end_date`
 
-You can run the `get_filter_options()` function to return a more complete summary of the filters you can apply to your search. The dictionary it outputs shows you filters (`keys`) and their possible options (`values`). WAHIS Disease naming is a bit inconsistent with extra spaces and weird parenthesis *(see image below)*. I strongly recommend using this function to see how the disease you are interested in is being saved on the WAHIS database.
 
-![Screen Shot 2022-09-17 at 16 47 39](https://user-images.githubusercontent.com/47128655/190844671-a5d8ca55-e14d-425d-b75f-d0b875f07b68.jpg)
-
-# How to use this tool?
-You will need a decent computer and basic understanding of Python programming to run this script. I have created fairly extensive documentation (*see documentation.md file*)for the script. You can either run it as is or adapt the script it to suit your needs.
-
-## Using the Command-line Tool
-
-### 1. Getting filter options
-To view filter options in your command-line *(terminal/bash/shell)* run:
-
+## 1. Getting filter options
+I reccomend you get a complete summary of the filters you can apply to your search by running:
 ```bash
 python3 report_retriever.py -op
 ```
+This will output a file named *"WAHIS_filter_options.json"* in the *"OUTPUTS"* folder. This file shows you filters (`keys`) and their possible options (`values`). Use it to figure out how you want to filter results.  I strongly recommend using this function to see how the disease you are interested in is being saved on the WAHIS database.
 
-If no file named *"WAHIS_filter_options.json"* is present it will create one with all possible filtering options in it. Use it to figure out how you want to filter results.
+**NOTE:** WAHIS Disease naming is a bit inconsistent with extra spaces and weird parenthesis *(see image below)*.
 
-### 2. Gathering reports
-Now that you've thought about the data that is of interest to you, you're can gather reports of interest using flags and specify data of interest.
+![Screen Shot 2022-09-17 at 16 47 39](https://user-images.githubusercontent.com/47128655/190844671-a5d8ca55-e14d-425d-b75f-d0b875f07b68.jpg)
 
-#### Selecting date range
-You **MUST** limit report results based on a date range using the *-sd* (start_date) and *-ed* (end_date) flags. Date arguments must be added in *YYYY-MM-DD* format. The `start_date` must precede `end_date`.
+
+
+## 2. Gathering reports
+Now that you've thought about the data that is of interest it's time to start telling the program to access the data. Copy and paste filter values of interest into the command-line as per the instructions below.
+
+tk tk qgather reports of interest using flags and specify data of interest.spot
+
+### Selecting date range
+You **MUST** limit report results based on a date range using the `-sd` (`start_date`) and `-ed` (`end_date`) flags. Date arguments must be added in *YYYY-MM-DD* format. The `start_date` must precede `end_date`.
 
 **Example:**
 ```bash
 python3 report_retriever.py -sd 1990-01-01 -ed 2020-08-13
 ```
 
-#### Data from specific disease(s)
-Limit results based on disease(s) of interest using *--disease* or *-d* flags.
+### Data from specific disease(s)
+Limit results based on disease(s) of interest using `--disease` or `-d` flags.
 For single disease run:
 ```bash
 python3 report_retriever.py -d 'Official_Disease_Name'
@@ -88,10 +88,10 @@ For multiple diseases run:
 python3 report_retriever.py -d 'Official_Disease_Name_1' 'Official_Disease_Name_2' '...' 'Official_Disease_Name_x'
 ```
 
-#### Combining filter flags
+### Combining filter flags
 You can combine filter flags. The program will return reports that fit all of the filters you applied.
 
-##### Example
+**Example:**
 Assume you want to get reports for the following query:
 > Reports for *African Swine Fever* and *Foot & Mouth Disease* in *Europe* between a *January 1st 1990* and *August 13th 2020*
 
