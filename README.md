@@ -29,7 +29,6 @@ There are two ways you can interact with this tool. Either via the command-line 
  That said, there is fairly extensive documentation (*see DOCUMENTATION.md file*) for those wanting to build their own scripts. This requires will need a decent computer and basic understanding of Python programming language.
 
 # USAGE: ReportRetriever in the Command-line (RECOMMENDED)
-
 WAHIS has a lot of data. You're going to want to limit your search results to access only the data you need. This will reduce how long it takes for the program to run and also helps minimise the load on WAHIS servers. As you'll see below, reports must also be filtered by date range `start_date` and `end_date` in *YYYY-MM-DD* format. You can currently filter reports parameters listed below.
 
 1. **country**
@@ -65,11 +64,12 @@ This will output a file named *"WAHIS_filter_options.json"* in the *"OUTPUTS"* f
 
 
 ## 2. Gathering reports
-Now that you've thought about the data that is of interest it's time to start telling the program to access the data. Copy and paste filter values of interest into the command-line as per the instructions below.
+Now that you've thought about the data that is of interest it's time to start telling the program to access the data. Copy and paste filter values of interest into the command-line as per the instructions below. The program accepts multiple inputs for each filter flags. Filter flags can be combined.
 
-tk tk qgather reports of interest using flags and specify data of interest.spot
+> Please note that depending on the amount of data you're accessing this may take a LONG time. Processing 4000 reports may take up to 5hrs. The code automatically saves progress as it runs, by default an excel spreadsheet is saved every 250 reports.
 
-### Selecting date range
+
+### i) Selecting date range
 You **MUST** limit report results based on a date range using the `-sd` (`start_date`) and `-ed` (`end_date`) flags. Date arguments must be added in *YYYY-MM-DD* format. The `start_date` must precede `end_date`.
 
 **Example:**
@@ -77,7 +77,7 @@ You **MUST** limit report results based on a date range using the `-sd` (`start_
 python3 report_retriever.py -sd 1990-01-01 -ed 2020-08-13
 ```
 
-### Data from specific disease(s)
+### ii) Selecting specific disease(s)
 Limit results based on disease(s) of interest using `--disease` or `-d` flags.
 For single disease run:
 ```bash
@@ -88,10 +88,31 @@ For multiple diseases run:
 python3 report_retriever.py -d 'Official_Disease_Name_1' 'Official_Disease_Name_2' '...' 'Official_Disease_Name_x'
 ```
 
+#### iii) Limit data to specific region (or regions)
+Limit results based on disease(s) of interest using *--region* or *-r* flags.
+For single region run:
+```bash
+python3 report_retriever.py -r Region
+```
+For multiple regions run:
+```bash
+python3 report_retriever.py -r Region_1 Region_2 ... Region_X
+```
+
+#### iv) Limit data to specific country (or countries)
+Limit results based on disease(s) of interest using *--country* or *-c* flags.
+For single country run:
+```bash
+python3 report_retriever.py -c Country
+```
+For multiple countries run:
+```bash
+python3 report_retriever.py -c Country_1 Country_2 ... Country_X
+```
+
 ### Combining filter flags
 You can combine filter flags. The program will return reports that fit all of the filters you applied.
 
-**Example:**
 Assume you want to get reports for the following query:
 > Reports for *African Swine Fever* and *Foot & Mouth Disease* in *Europe* between a *January 1st 1990* and *August 13th 2020*
 
@@ -99,17 +120,12 @@ You would need to run:
 ```bash
 python3 report_retriever.py -d 'African swine fever virus (Inf. with) ' 'Foot and mouth disease virus (Inf. with) ' -r Europe -sd 1990-01-01 -ed 2020-08-13
 ```
+Admittedly this code isn't very pretty, but it gets the job done!
 
-#### Data from a specific country (or countries)
-Limit results based on disease(s) of interest using *--country* or *-c* flags.
-For single disease run:
-```bash
-python3 report_retriever.py -c Country
-```
-For multiple diseases run:
-```bash
-python3 report_retriever.py -d 'Official_Disease_Name_1' 'Official_Disease_Name_2' '...' 'Official_Disease_Name_x'
-```
-going to need to make a list of all the reports that fit the criteria of your filter options.
+## What happens after I run the program?
+The program will make a list of reports that fit your criteria. For each report in the list it will access the report data, extract the outbreak from the data and append them to a excel spreadsheet. A new spreadsheet is saved after every 250 reports it processes.
 
-Please note that depending on the amount of data you're accessing this may take a LONG time. Processing 4000 reports may take up to 5hrs. The code automatically saves progress as it runs. Depending on how many people use this tool I will work on
+To understand the outputted spreadsheets, you need to understand the information contained in each report. The "DOCUMENTATION.md" file has a section called "Understanding the contents of an individual report" which explains this in detail.
+
+# USAGE: Understanding the outputted data.
+I am going to leave this blank for the time being. If people use this I will elaborate on report contents. 
