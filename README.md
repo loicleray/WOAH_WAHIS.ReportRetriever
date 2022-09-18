@@ -25,12 +25,6 @@ By default this script creates an excel spreadsheet for each outbreak in the dis
 
 WAHIS has a lot of data. You're going to want to limit your search results to access only the data you need.
 
-> *African Swine Fever* reports in *Albania* between a *certain date range*"
-
-**OR**
-
->*Equine arteritis virus (Inf. with)* in *Asia* that are a *recurrence of an eradicated disease*.
-
 This will reduce how long it takes for the program to run and also helps minimise the load on WAHIS servers. Reports should also be filtered by date range `start_date` and `end_date` in *YYYY-MM-DD* format. Reports can be filtered via 10 filters, including:
 
 1. **country**
@@ -70,9 +64,52 @@ To view filter options in your command-line *(terminal/bash/shell)* run:
 python3 report_retriever.py -op
 ```
 
-if no file named *WAHIS_filter_options.json"* is present it will create one with all possible filtering options in it.
+If no file named *"WAHIS_filter_options.json"* is present it will create one with all possible filtering options in it. Use it to figure out how you want to filter results.
 
 ### 2. Gathering reports
-Now that you've thought about the data that is of interest to you, you're going to need to make a list of all the reports that fit the criteria of your filter options.
+Now that you've thought about the data that is of interest to you, you're can gather reports of interest using flags and specify data of interest.
+
+#### Selecting date range
+You **MUST** limit report results based on a date range using the *-sd* (start_date) and *-ed* (end_date) flags. Date arguments must be added in *YYYY-MM-DD* format. The `start_date` must precede `end_date`.
+
+**Example:**
+```bash
+python3 report_retriever.py -sd 1990-01-01 -ed 2020-08-13
+```
+
+#### Data from specific disease(s)
+Limit results based on disease(s) of interest using *--disease* or *-d* flags.
+For single disease run:
+```bash
+python3 report_retriever.py -d 'Official_Disease_Name'
+```
+For multiple diseases run:
+```bash
+python3 report_retriever.py -d 'Official_Disease_Name_1' 'Official_Disease_Name_2' '...' 'Official_Disease_Name_x'
+```
+
+#### Combining filter flags
+You can combine filter flags. The program will return reports that fit all of the filters you applied.
+
+##### Example
+Assume you want to get reports for the following query:
+> Reports for *African Swine Fever* and *Foot & Mouth Disease* in *Europe* between a *January 1st 1990* and *August 13th 2020*
+
+You would need to run:
+```bash
+python3 report_retriever.py -d 'African swine fever virus (Inf. with) ' 'Foot and mouth disease virus (Inf. with) ' -r Europe -sd 1990-01-01 -ed 2020-08-13
+```
+
+#### Data from a specific country (or countries)
+Limit results based on disease(s) of interest using *--country* or *-c* flags.
+For single disease run:
+```bash
+python3 report_retriever.py -c Country
+```
+For multiple diseases run:
+```bash
+python3 report_retriever.py -d 'Official_Disease_Name_1' 'Official_Disease_Name_2' '...' 'Official_Disease_Name_x'
+```
+going to need to make a list of all the reports that fit the criteria of your filter options.
 
 Please note that depending on the amount of data you're accessing this may take a LONG time. Processing 4000 reports may take up to 5hrs. The code automatically saves progress as it runs. Depending on how many people use this tool I will work on
