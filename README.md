@@ -6,6 +6,8 @@ Happy reseraching! 🤓
 
 ---
 
+![RR-Thumbnail@8x](https://user-images.githubusercontent.com/47128655/190937217-a42465cc-b2d6-4ca6-bbf2-2aac3ea3f31d.png)
+
 ## Introduction
 This document describes a new method for "web scraping" data from the World Organisation for Animal Health's (WOAH, previously OIE) World Animal Health Information System (WAHIS). It replaces [previous efforts to automate WAHIS data download](https://onlinelibrary.wiley.com/doi/abs/10.1111/tbed.14133?casa_token=V85WAk0RTFMAAAAA:lPcjIz-Os652-5RChFVqjZcWOhrb-8IdP6IKr5CsoS9NfCoP5CwVUiNPY78-GYhEO1cSM1m4CUeKvg).
 
