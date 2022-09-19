@@ -1,7 +1,8 @@
 # OIE_WAHIS.ReportRetriever
 Automatically download publicly available animal disease reports from the World Organisation for Animal Health WAHIS database. Researchers can filter and download disease outbreak information to Excel Spreadsheets, without having to do it manually.
 
-> Made with ♥ by [Loic Leray](https://loicleray.com). I hope that these tools will help epidemiologists and researchers with their projects.
+> Made with ♥ by [Loic Leray](https://loicleray.com). If this was of use to you, please consider [buying me a "coffee"](https://www.buymeacoffee.com/loicleray) and share your projects with me! I hope that these tools will help epidemiologists and researchers with their projects.
+Happy reseraching!🤓
 
 ---
 
