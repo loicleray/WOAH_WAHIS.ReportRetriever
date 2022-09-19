@@ -88,7 +88,7 @@ For multiple diseases run:
 python3 report_retriever.py -d 'Official_Disease_Name_1' 'Official_Disease_Name_2' '...' 'Official_Disease_Name_x'
 ```
 
-#### iii) Limit data to specific region (or regions)
+### iii) Limit data to specific region (or regions)
 Limit results based on disease(s) of interest using *--region* or *-r* flags.
 For single region run:
 ```bash
@@ -99,7 +99,7 @@ For multiple regions run:
 python3 report_retriever.py -r Region_1 Region_2 ... Region_X
 ```
 
-#### iv) Limit data to specific country (or countries)
+### iv) Limit data to specific country (or countries)
 Limit results based on disease(s) of interest using *--country* or *-c* flags.
 For single country run:
 ```bash
@@ -123,9 +123,9 @@ python3 report_retriever.py -d 'African swine fever virus (Inf. with) ' 'Foot an
 Admittedly this code isn't very pretty, but it gets the job done!
 
 ## What happens after I run the program?
-The program will make a list of reports that fit your criteria. For each report in the list it will access the report data, extract the outbreak from the data and append them to a excel spreadsheet. A new spreadsheet is saved after every 250 reports it processes.
+The program will make a list of reports that fit your criteria. For each report in the list it will access the report data, extract the outbreak from the data and append them to a excel spreadsheet. A new spreadsheet is saved after every 250 reports it processes. There is a loading bar that shows the programs progress. However, the progress bar shows rough estimates only, time estimates are not very accurate.
 
 To understand the outputted spreadsheets, you need to understand the information contained in each report. The "DOCUMENTATION.md" file has a section called "Understanding the contents of an individual report" which explains this in detail.
 
 # USAGE: Understanding the outputted data.
-I am going to leave this blank for the time being. If people use this I will elaborate on report contents. 
+I am going to leave this blank for the time being. If people use this I will elaborate on report contents.

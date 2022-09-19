@@ -14,7 +14,7 @@ import requests
 import numpy as np
 import pandas as pd
 import pprint
-# from tqdm.auto import tqdm
+from tqdm import tqdm
 # from ast import literal_eval
 
 def get_filter_options():
@@ -122,8 +122,6 @@ def get_report_list(country = [], region = [], disease = [], start_date = str("1
     # JSON RESULTS from POST /pi/getReportList
     return response_report_list.json()
 
-
-
 def get_report_contents(report_info_id):
     '''Returns report data as dictionary for a given reportID.'''
 
@@ -134,6 +132,8 @@ def get_report_contents(report_info_id):
     headers_report = {}
 
     try:
+        #sleep to reduce server load
+        time.sleep(0.5)
         response_single_report = requests.request("GET", url_report, headers=headers_report, data=payload_report)
 
         #save report contents as temporary dict & log progress
@@ -220,16 +220,8 @@ def append_report_data_to_outbreak(list_of_outbreak_dicts, contents_single_repor
 
     return list_of_outbreak_dicts
 
-def parse_disease():
-    ''''''
-    pass
-
-def parse_date():
-
-    pass
-# tk tk tk
 def main():
-
+    #get current directory and create new folder "ouputs" if it doesn't exhist
     CURRENT_DIRECTORY = os.getcwd()
     OUTPUT_DIRECTORY = os.path.join(CURRENT_DIRECTORY, r'OUTPUTS')
     if not os.path.exists(OUTPUT_DIRECTORY):
@@ -289,6 +281,9 @@ def main():
     # if parsed_args.country == True:
     print("Just parsed_args: ",type(parsed_args))
     print("Just parsed_args: ",parsed_args)
+
+    # for item in tqdm(range(int(9e6)), desc="Main Process"):
+    #     pass
 
     # actually running the code based off the user inputs...
 
