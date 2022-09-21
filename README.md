@@ -8,6 +8,10 @@ Happy researching! 🤓
 
 ![RR-Thumbnail@8x](https://user-images.githubusercontent.com/47128655/190937217-a42465cc-b2d6-4ca6-bbf2-2aac3ea3f31d.png)
 
+---
+# I am still working on this tool. It is not yet finalised, but should work for most diseases. [If you specific data contact me through my website.](https://www.loicleray.com/contact/).
+---
+
 ## Introduction
 This document describes a new method for "web scraping" data from the World Organisation for Animal Health's (WOAH, previously OIE) World Animal Health Information System (WAHIS). It replaces [previous efforts to automate WAHIS data download](https://onlinelibrary.wiley.com/doi/abs/10.1111/tbed.14133?casa_token=V85WAk0RTFMAAAAA:lPcjIz-Os652-5RChFVqjZcWOhrb-8IdP6IKr5CsoS9NfCoP5CwVUiNPY78-GYhEO1cSM1m4CUeKvg).
 
@@ -125,6 +129,13 @@ python3 report_retriever.py -d 'African swine fever virus (Inf. with) ' 'Foot an
 ```
 Admittedly this code isn't very pretty, but it gets the job done!
 
+### Running without filter flags
+I strongly recommend you **DO NOT** run the script without adding filter/flags. That said, the default behaviour for the program is to return all reports for all diseases submitted in the previous 7 days.
+
+The code I don't reccoment you run:
+```bash
+python3 report_retriever.py
+```
 ## What happens after I run the program?
 The program will make a list of reports that fit your criteria. For each report in the list it will access the report data, extract the outbreak from the data and append them to a excel spreadsheet. A new spreadsheet is saved after every 250 reports it processes. There is a loading bar that shows the programs progress. However, the progress bar shows rough estimates only, time estimates are not very accurate.
 
