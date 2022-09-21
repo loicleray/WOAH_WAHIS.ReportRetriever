@@ -8,10 +8,6 @@ Happy researching! 🤓
 
 ![RR-Thumbnail@8x](https://user-images.githubusercontent.com/47128655/190937217-a42465cc-b2d6-4ca6-bbf2-2aac3ea3f31d.png)
 
----
-# I am still working on this tool. It is not yet finalised, but should work for most diseases. [If you specific data contact me through my website.](https://www.loicleray.com/contact/).
----
-
 ## Introduction
 This document describes a new method for "web scraping" data from the World Organisation for Animal Health's (WOAH, previously OIE) World Animal Health Information System (WAHIS). It replaces [previous efforts to automate WAHIS data download](https://onlinelibrary.wiley.com/doi/abs/10.1111/tbed.14133?casa_token=V85WAk0RTFMAAAAA:lPcjIz-Os652-5RChFVqjZcWOhrb-8IdP6IKr5CsoS9NfCoP5CwVUiNPY78-GYhEO1cSM1m4CUeKvg).
 
@@ -29,6 +25,10 @@ This code merely automates the retrieval of publicly available information at a 
 By default this script creates an excel spreadsheet for each outbreak in the disease and filters you specify. For each outbreak it shows outbreak information (ID#s, location, animal population affected, disease and strain, testing ect...) as well as report information the outbreak was taken from (organisations involved, control methods, report IDs ect...).
 
 ![image](https://user-images.githubusercontent.com/47128655/190842786-afdd502e-628f-4d90-815e-63dd41ab26db.jpeg)
+
+---
+# I am still working on this tool. It is not yet finalised, but should work for most diseases. [If you need specific data contact me through my website.](https://www.loicleray.com/contact/).
+---
 
 ## How to use this tool?
 There are two ways you can interact with this tool. Either via the command-line interface (CLI) or in your own scripts. The CLI is the recommended (and most approachable way) for non-coders to get WAHIS report data.
